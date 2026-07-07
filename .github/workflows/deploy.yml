@@ -12,6 +12,9 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      # ใช้เช็คว่า secrets ถูกตั้งค่าหรือยัง — ถ้ายัง จะข้ามขั้น deploy
+      CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     steps:
       - uses: actions/checkout@v4
 
@@ -26,9 +29,14 @@ jobs:
         run: npm run build
 
       - name: Deploy ขึ้น Cloudflare Pages
+        if: ${{ env.CF_TOKEN != '' }}
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=taladcode
         # ตั้งค่า secrets สองตัวนี้ใน Settings → Secrets and variables → Actions
+
+      - name: แจ้งเตือนถ้ายังไม่ได้ตั้งค่า Cloudflare
+        if: ${{ env.CF_TOKEN == '' }}
+        run: echo "::warning::ข้ามขั้น deploy — ยังไม่ได้ตั้ง CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID (วิธีตั้งค่าอยู่ใน README)"

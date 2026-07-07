@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Garland from '../components/Garland.astro';
+import { SUBMIT_URL } from '../config';
 
 // เส้นทางมือใหม่: จากศูนย์ → Pull Request แรก ใน 5 ขั้น
 const steps = [
@@ -94,10 +95,8 @@ const steps = [
       </li>
     </ul>
     <div class="actions">
-      <a
-        class="btn btn-gold"
-        href="https://github.com/taladcode/content/issues/new/choose"
-        rel="noopener">ส่งโปรเจกต์แรกของคุณ</a
+      <a class="btn btn-gold" href={SUBMIT_URL} rel="noopener"
+        >ส่งโปรเจกต์แรกของคุณ</a
       >
       <a class="btn btn-line" href="/">กลับไปเดินตลาด →</a>
     </div>

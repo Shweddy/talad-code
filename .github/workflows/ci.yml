@@ -1,0 +1,25 @@
+name: ตรวจ build (PR)
+
+# รัน build ทุกครั้งที่เปิด/อัปเดต PR — เนื้อหาผิดสคีมาจะเห็นกากบาทแดง
+# ตั้งแต่ใน PR ไม่ต้องรอ merge แล้วค่อยพัง
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build เว็บ (ตรวจสคีมาเนื้อหาไปในตัว)
+        run: npm run build
