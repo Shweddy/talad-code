@@ -1,0 +1,15 @@
+<div class="garland wrap" role="presentation">
+  <span class="thread"></span>
+  <span class="bead sm"></span>
+  <span class="bead"></span>
+  <span class="bead sm"></span>
+  <span class="thread rev"></span>
+</div>
+
+<style>
+  .garland { display: flex; align-items: center; gap: 14px; }
+  .thread { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--indigo-soft)); }
+  .thread.rev { background: linear-gradient(90deg, var(--indigo-soft), transparent); }
+  .bead { width: 8px; height: 8px; border-radius: 50%; background: var(--marigold); opacity: 0.9; }
+  .bead.sm { width: 5px; height: 5px; opacity: 0.5; }
+</style>

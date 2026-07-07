@@ -1,0 +1,20 @@
+{
+  "name": "taladcode",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "ตลาดโค้ด — ตลาดสดโอเพนซอร์สสำหรับนักพัฒนาไทย เปิดแผงใหม่ทุกเดือน",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "sync-stars": "node scripts/sync-stars.mjs"
+  },
+  "dependencies": {
+    "astro": "^5.0.0"
+  },
+  "devDependencies": {
+    "@fontsource/chakra-petch": "^5.1.0",
+    "@fontsource/sarabun": "^5.1.0",
+    "@fontsource/ibm-plex-mono": "^5.1.0"
+  }
+}

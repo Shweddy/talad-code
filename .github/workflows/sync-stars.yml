@@ -1,0 +1,41 @@
+name: อัปเดตจำนวนดาว (sync stars)
+
+on:
+  schedule:
+    - cron: '0 22 * * *' # 22:00 UTC = ตี 5 เวลาไทย ทุกวัน
+  workflow_dispatch: {}   # กดรันเองได้จากหน้า Actions
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-stars
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: ดึงดาวจาก GitHub API
+        run: node scripts/sync-stars.mjs
+        env:
+          # GITHUB_TOKEN มีให้อัตโนมัติ → rate limit 1,000 ครั้ง/ชม. เหลือเฟือ
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: commit ถ้ามีการเปลี่ยนแปลง
+        run: |
+          git config user.name "taladcode-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add src/data/stars.json
+          if git diff --cached --quiet; then
+            echo "ดาวไม่เปลี่ยน — ไม่ต้อง commit"
+          else
+            git commit -m "chore: อัปเดตจำนวนดาว $(date -u +%Y-%m-%d)"
+            git push
+          fi

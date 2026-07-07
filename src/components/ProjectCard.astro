@@ -1,0 +1,84 @@
+---
+import starsData from '../data/stars.json';
+
+interface Props {
+  name: string;
+  repo: string;
+  category: string;
+  level: string;
+  thaiMade?: boolean;
+  description: string;
+  why: string;
+  website?: string;
+}
+const { name, repo, category, level, thaiMade, description, why, website } = Astro.props;
+
+// จำนวนดาวมาจาก stars.json ที่ sync ทุกวัน — ไม่เรียก API ตอน build
+const starInfo = (starsData.repos as Record<string, { stars: number }>)[repo];
+const stars = starInfo
+  ? starInfo.stars >= 1000
+    ? (starInfo.stars / 1000).toFixed(1) + 'k'
+    : String(starInfo.stars)
+  : null;
+---
+
+<article class="card">
+  <div class="card-top">
+    <div class="chips">
+      <span class="chip">{category}</span>
+      <span class="chip lvl">{level}</span>
+      {thaiMade && <span class="chip thai">🇹🇭 ผลงานคนไทย</span>}
+    </div>
+    {stars && <span class="stars mono">★ {stars}</span>}
+  </div>
+  <h3>
+    <a href={`https://github.com/${repo}`} rel="noopener">{name}</a>
+  </h3>
+  <p class="desc">{description}</p>
+  <div class="why"><b>ทำไมต้องลอง:</b> {why}</div>
+  <div class="links mono">
+    <a href={`https://github.com/${repo}`} rel="noopener">{repo}</a>
+    {website && <a href={website} rel="noopener">เว็บไซต์ ↗</a>}
+  </div>
+</article>
+
+<style>
+  .card {
+    background: var(--indigo);
+    border: 1px solid var(--indigo-soft);
+    border-radius: 10px;
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .card:hover { transform: translateY(-4px); border-color: rgba(246, 177, 45, 0.5); }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: rgba(246, 177, 45, 0.12);
+    color: var(--marigold-soft);
+  }
+  .chip.lvl { background: rgba(123, 196, 127, 0.12); color: var(--leaf); }
+  .chip.thai { background: rgba(255, 255, 255, 0.08); color: var(--cream); }
+  .stars { font-size: 12.5px; color: var(--cream-dim); white-space: nowrap; }
+  h3 { font-weight: 600; font-size: 1.15rem; }
+  h3 a { color: var(--jasmine); }
+  h3 a:hover { color: var(--marigold); }
+  .desc { font-size: 15px; color: var(--cream-dim); flex: 1; }
+  .why {
+    border-left: 2px solid var(--marigold);
+    padding-left: 12px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .why b { color: var(--marigold); font-weight: 600; }
+  .links { display: flex; gap: 16px; font-size: 12px; }
+  .links a { color: var(--cream-dim); }
+  .links a:hover { color: var(--marigold); }
+</style>

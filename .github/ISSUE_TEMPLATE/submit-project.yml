@@ -1,0 +1,73 @@
+name: 🌟 แนะนำโปรเจกต์โอเพนซอร์ส
+description: ส่งโปรเจกต์ที่คุณอยากให้ลงในฉบับหน้า
+title: "[แนะนำ] ชื่อโปรเจกต์"
+labels: ["submission", "รอคัดเลือก"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ขอบคุณที่ช่วยแนะนำโปรเจกต์! 🙏
+        ทีมอาสาสมัครจะรีวิวก่อนตีพิมพ์ในฉบับถัดไป
+        **เกณฑ์เบื้องต้น:** เป็นโอเพนซอร์สจริง (มี LICENSE), ยังมีการดูแล, และน่าสนใจสำหรับนักพัฒนาไทย
+
+  - type: input
+    id: repo
+    attributes:
+      label: GitHub repo
+      description: รูปแบบ owner/repo
+      placeholder: PyThaiNLP/pythainlp
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: หมวดหมู่
+      options:
+        - Python
+        - JavaScript
+        - TypeScript
+        - Go
+        - Rust
+        - AI-LLM
+        - Mobile
+        - DevOps
+        - DevTools
+        - เกม-กราฟิก
+        - อื่นๆ
+    validations:
+      required: true
+
+  - type: dropdown
+    id: level
+    attributes:
+      label: ระดับความยาก
+      options:
+        - มือใหม่
+        - กลาง
+        - สูง
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: thai-made
+    attributes:
+      label: ผลงานคนไทย
+      options:
+        - label: โปรเจกต์นี้พัฒนาโดยนักพัฒนาไทยหรือชุมชนไทยเป็นหลัก
+
+  - type: textarea
+    id: description
+    attributes:
+      label: โปรเจกต์นี้คืออะไร (ภาษาไทย ไม่เกิน 2 ประโยค)
+      placeholder: ไลบรารีประมวลผลภาษาธรรมชาติสำหรับภาษาไทย...
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: ทำไมต้องลอง (หนึ่งประโยคเด็ด)
+      placeholder: ใช้งานจริงในโปรดักชันได้เลย เอกสารภาษาไทยครบ
+    validations:
+      required: true

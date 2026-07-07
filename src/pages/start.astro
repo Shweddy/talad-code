@@ -1,0 +1,157 @@
+---
+import Base from '../layouts/Base.astro';
+import Garland from '../components/Garland.astro';
+
+// เส้นทางมือใหม่: จากศูนย์ → Pull Request แรก ใน 5 ขั้น
+const steps = [
+  {
+    title: 'เปิดบัญชี GitHub',
+    body: 'สมัครฟรีที่ github.com — เหมือนมีตะกร้าประจำตัวไว้เดินตลาด บัญชีนี้จะกลายเป็นผลงานสะสม (portfolio) ของคุณไปในตัว',
+    link: { href: 'https://github.com/signup', label: 'github.com/signup' },
+  },
+  {
+    title: 'เลือกของจากแผง',
+    body: 'เดินดูฉบับล่าสุด มองหาป้ายเขียว "มือใหม่" — เป็นโปรเจกต์ที่ชุมชนคัดแล้วว่าเป็นมิตรกับคนเพิ่งเริ่ม หรือจะเริ่มจากสนามซ้อมอย่าง first-contributions ก็ได้',
+    link: {
+      href: 'https://github.com/firstcontributions/first-contributions',
+      label: 'first-contributions',
+    },
+  },
+  {
+    title: 'Fork มาเป็นของเรา',
+    body: 'กดปุ่ม Fork มุมขวาบนของ repo — เหมือนขอสูตรจากแม่ค้ามาลองทำที่ครัวตัวเอง จะลองผิดลองถูกยังไงก็ไม่กระทบของจริง',
+  },
+  {
+    title: 'แก้แล้ว commit',
+    body: 'ไม่ต้องเริ่มจากโค้ดยากๆ — แก้คำผิดในเอกสาร แปลภาษา เพิ่มตัวอย่างการใช้งาน ล้วนเป็น contribution ที่โปรเจกต์ต้องการจริง',
+  },
+  {
+    title: 'เปิด Pull Request',
+    body: 'ส่งของที่ทำกลับไปให้เจ้าของแผงรีวิว เขียนอธิบายสั้นๆ ว่าแก้อะไรและทำไม ถ้ามีคอมเมนต์กลับมาก็ค่อยๆ ปรับ — ทุกคนเคยเป็นมือใหม่มาก่อน',
+  },
+];
+---
+
+<Base
+  title="มือใหม่เริ่มที่นี่ — ตลาดโค้ด"
+  description="คู่มือเดินตลาดโอเพนซอร์สครั้งแรก ตั้งแต่สมัคร GitHub จนถึงส่ง Pull Request แรกในชีวิต อธิบายเป็นภาษาไทยทีละขั้น"
+>
+  <header class="wrap hero">
+    <div class="eyebrow">คู่มือมือใหม่</div>
+    <h1>เดินตลาดครั้งแรก<br /><span class="gold">ไม่ต้องกลัวหลง</span></h1>
+    <p class="sub">
+      โอเพนซอร์สก็เหมือนตลาดสด — ทุกแผงเปิดให้เดินดูฟรี หยิบไปใช้ได้
+      ปรับสูตรต่อได้ และถ้าอยากช่วยแม่ค้าจัดของ ก็ยินดีเสมอ
+      หน้านี้จะพาคุณเดินตั้งแต่ปากตลาดจนถึงส่งของชิ้นแรกด้วยมือตัวเอง
+    </p>
+  </header>
+
+  <Garland />
+
+  <section class="wrap">
+    <div class="eyebrow">เส้นทางเดินตลาด</div>
+    <h2>Contribute ครั้งแรกใน 5 ขั้น</h2>
+    <ol class="steps">
+      {
+        steps.map((s, i) => (
+          <li class="step">
+            <span class="num mono">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+              {s.link && (
+                <a class="step-link mono" href={s.link.href} rel="noopener">
+                  {s.link.label} ↗
+                </a>
+              )}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <Garland />
+
+  <section class="wrap">
+    <div class="eyebrow">ใกล้กว่าที่คิด</div>
+    <h2>PR แรกของคุณ อาจอยู่ที่ตลาดนี้เอง</h2>
+    <p class="sub">
+      ตลาดโค้ดเองก็เป็นโปรเจกต์โอเพนซอร์ส — ทุกฉบับคือไฟล์ Markdown
+      ที่อาสาสมัครช่วยกันเขียน คุณช่วยได้ตั้งแต่วันนี้โดยไม่ต้องเขียนโค้ดสักบรรทัด
+    </p>
+    <ul class="ways">
+      <li>
+        <b>ส่งโปรเจกต์เข้าแผง</b> — เจอของดีอยากให้คนไทยรู้จัก
+        กรอกฟอร์มสั้นๆ ไม่ต้องใช้ git เลย
+      </li>
+      <li>
+        <b>แก้คำผิด ปรับคำอธิบาย</b> — เปิด PR แก้ไฟล์ฉบับใน
+        <code>content/issues/</code> นี่แหละ Pull Request แรกที่จับต้องได้ที่สุด
+      </li>
+      <li>
+        <b>อาสาเป็นพ่อค้าแม่ค้า</b> — ช่วยคัดเลือกและเขียนคำแนะนำประจำฉบับ
+      </li>
+    </ul>
+    <div class="actions">
+      <a
+        class="btn btn-gold"
+        href="https://github.com/taladcode/content/issues/new/choose"
+        rel="noopener">ส่งโปรเจกต์แรกของคุณ</a
+      >
+      <a class="btn btn-line" href="/">กลับไปเดินตลาด →</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { padding-top: 96px; padding-bottom: 64px; max-width: 800px; }
+  h1 {
+    font-weight: 700;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  .gold { color: var(--marigold); }
+  .sub { font-size: 1.05rem; color: var(--cream-dim); max-width: 36em; }
+
+  section { padding-top: 64px; padding-bottom: 32px; }
+  h2 { font-weight: 600; font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 28px; }
+
+  .steps { list-style: none; display: flex; flex-direction: column; gap: 16px; max-width: 720px; }
+  .step {
+    display: flex;
+    gap: 20px;
+    background: var(--indigo);
+    border: 1px solid var(--indigo-soft);
+    border-radius: 10px;
+    padding: 24px 26px;
+  }
+  .num { color: var(--marigold); font-size: 15px; padding-top: 4px; }
+  .step h3 { font-weight: 600; font-size: 1.05rem; margin-bottom: 6px; }
+  .step p { font-size: 15px; color: var(--cream-dim); }
+  .step-link { display: inline-block; margin-top: 10px; font-size: 12.5px; color: var(--marigold-soft); }
+  .step-link:hover { color: var(--marigold); }
+
+  .ways { list-style: none; max-width: 44em; display: flex; flex-direction: column; gap: 14px; margin-bottom: 36px; }
+  .ways li {
+    border-left: 2px solid var(--marigold);
+    padding-left: 14px;
+    font-size: 15px;
+    color: var(--cream-dim);
+  }
+  .ways b { color: var(--cream); font-weight: 600; }
+  .ways code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    background: var(--indigo);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+  .actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  @media (max-width: 640px) {
+    .hero { padding-top: 64px; }
+    .step { flex-direction: column; gap: 10px; padding: 20px; }
+  }
+</style>

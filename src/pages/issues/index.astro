@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const issues = (await getCollection('issues', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.issue - a.data.issue
+);
+---
+
+<Base title="ฉบับทั้งหมด — ตลาดโค้ด">
+  <section class="wrap">
+    <div class="eyebrow">แผงย้อนหลัง</div>
+    <h1>ฉบับทั้งหมด</h1>
+    <ul class="issue-list">
+      {
+        issues.map((issue) => (
+          <li>
+            <a href={`/issues/${issue.id}`}>
+              <span class="num mono">#{String(issue.data.issue).padStart(3, '0')}</span>
+              <span class="name">{issue.data.title}</span>
+              <span class="meta mono">
+                {issue.data.projects.length} โปรเจกต์ ·{' '}
+                {issue.data.date.toLocaleDateString('th-TH', {
+                  year: 'numeric',
+                  month: 'short',
+                })}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>
+
+<style>
+  section { padding-top: 72px; }
+  h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 36px; }
+  .issue-list { list-style: none; }
+  .issue-list a {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    padding: 20px 4px;
+    border-bottom: 1px solid var(--indigo-soft);
+    transition: background 0.15s;
+  }
+  .issue-list a:hover { background: var(--indigo); }
+  .num { color: var(--marigold); font-size: 14px; }
+  .name { font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 1.1rem; flex: 1; }
+  .meta { font-size: 12.5px; color: var(--cream-dim); white-space: nowrap; }
+  @media (max-width: 640px) {
+    .issue-list a { flex-wrap: wrap; gap: 8px 16px; }
+  }
+</style>

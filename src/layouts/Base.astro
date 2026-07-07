@@ -1,0 +1,108 @@
+---
+import '@fontsource/chakra-petch/600.css';
+import '@fontsource/chakra-petch/700.css';
+import '@fontsource/sarabun/300.css';
+import '@fontsource/sarabun/400.css';
+import '@fontsource/sarabun/600.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+const {
+  title,
+  description = 'ตลาดสดโอเพนซอร์ส — เปิดแผงโปรเจกต์น่าสนใจทุกเดือน อธิบายเป็นภาษาไทย',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#141E33" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body>
+    <nav>
+      <div class="wrap nav-inner">
+        <a class="logo" href="/">
+          <span class="wai">ตลาดโค้ด</span>
+          <span class="en mono">// taladcode.dev</span>
+        </a>
+        <div class="nav-links">
+          <a href="/start">มือใหม่เริ่มที่นี่</a>
+          <a href="/issues">ฉบับทั้งหมด</a>
+          <a
+            href="https://github.com/taladcode/content/issues/new/choose"
+            rel="noopener">ส่งโปรเจกต์</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <slot />
+
+    <footer>
+      <div class="wrap foot-inner">
+        <div>
+          <span class="display" style="color: var(--marigold);">ตลาดโค้ด</span>
+          — ตลาดสดโอเพนซอร์สของนักพัฒนาไทย
+        </div>
+        <div class="mono">ทำด้วย ♥ โดยอาสาสมัคร · เนื้อหาเผยแพร่แบบ CC BY-SA</div>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(20, 30, 51, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(246, 177, 45, 0.15);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  .logo { display: flex; align-items: baseline; gap: 10px; }
+  .wai {
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--marigold);
+  }
+  .en { font-size: 12px; color: var(--cream-dim); }
+  .nav-links { display: flex; gap: 28px; font-size: 15px; font-weight: 400; }
+  .nav-links a { color: var(--cream-dim); transition: color 0.2s; }
+  .nav-links a:hover { color: var(--marigold); }
+
+  footer { border-top: 1px solid var(--indigo-soft); margin-top: 72px; }
+  .foot-inner {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 14px;
+    color: var(--cream-dim);
+  }
+  @media (max-width: 640px) {
+    .en { display: none; }
+  }
+</style>
