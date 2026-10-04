@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-03T00:53:24.602Z",
+  "updatedAt": "2026-10-04T00:19:42.620Z",
   "repos": {
     "PyThaiNLP/pythainlp": {
       "stars": 1158,
@@ -7,7 +7,7 @@
       "fullName": "PyThaiNLP/pythainlp"
     },
     "excalidraw/excalidraw": {
-      "stars": 133408,
+      "stars": 133460,
       "archived": false,
       "fullName": "excalidraw/excalidraw"
     },
@@ -17,17 +17,17 @@
       "fullName": "OpenThaiGPT/openthaigpt"
     },
     "firstcontributions/first-contributions": {
-      "stars": 56183,
+      "stars": 56193,
       "archived": false,
       "fullName": "firstcontributions/first-contributions"
     },
     "hoppscotch/hoppscotch": {
-      "stars": 80561,
+      "stars": 80562,
       "archived": false,
       "fullName": "hoppscotch/hoppscotch"
     },
     "withastro/astro": {
-      "stars": 63014,
+      "stars": 63028,
       "archived": false,
       "fullName": "withastro/astro"
     }
