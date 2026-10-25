@@ -1,9 +1,16 @@
 import { defineConfig } from 'astro/config';
 
+import cloudflare from "@astrojs/cloudflare";
+
 export default defineConfig({
-  site: 'https://taladcode.dev', // เปลี่ยนเป็นโดเมนจริงของคุณ
+  // เปลี่ยนเป็นโดเมนจริงของคุณ
+  site: 'https://taladcode.dev',
+
   trailingSlash: 'never',
+
   build: {
     inlineStylesheets: 'auto',
   },
+
+  adapter: cloudflare()
 });
